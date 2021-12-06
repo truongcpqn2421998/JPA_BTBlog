@@ -15,6 +15,7 @@
 <form th:action="@{/blog/edit}" th:object="${blogForm}" method="post" id="C" enctype="multipart/form-data">
     <table>
         <input th:field="*{id}" hidden>
+        <input name="categoryOld" th:value="${img}" hidden>
         <tr>
             <td> Title:</td>
             <td><input type="text" th:field="*{title}"/></td>

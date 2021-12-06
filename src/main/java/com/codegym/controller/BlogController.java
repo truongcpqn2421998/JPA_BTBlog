@@ -84,20 +84,25 @@ public class BlogController {
         Optional<Blog> blog = blogService.findById(id);
         ModelAndView modelAndView = new ModelAndView("/blog/edit");
         Blog blog1=blog.get();
+        String img=blog.get().getImage();
         BlogForm blogForm= new BlogForm(blog1.getId(),blog1.getTitle(),blog1.getContent(),blog1.getCategory());
         modelAndView.addObject("blogForm", blogForm);
+        modelAndView.addObject("img",img);
         return modelAndView;
     }
 
 
     @PostMapping("/edit")
-    public ModelAndView edit(@ModelAttribute BlogForm blogForm){
+    public ModelAndView edit(@ModelAttribute BlogForm blogForm,@RequestParam String categoryOld){
         MultipartFile multipartFile = blogForm.getImage();
         String fileName = multipartFile.getOriginalFilename();
         try {
             FileCopyUtils.copy(blogForm.getImage().getBytes(), new File(fileUpload + fileName));
         } catch (IOException ex) {
             ex.printStackTrace();
+        }
+        if(blogForm.getImage().isEmpty()){
+            fileName=categoryOld;
         }
         Blog blog=new Blog(blogForm.getId(),blogForm.getTitle(),blogForm.getContent(),fileName,blogForm.getCategory());
         blogService.save(blog);

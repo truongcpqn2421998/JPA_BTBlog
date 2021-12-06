@@ -1,6 +1,10 @@
 package com.codegym.model.blog;
 
 import com.codegym.model.Category;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 
@@ -16,6 +20,7 @@ public class Blog {
 
     @ManyToOne
     @JoinColumn(name = "category_id")
+//    @JsonManagedReference
     private Category category;
 
     public Blog() {

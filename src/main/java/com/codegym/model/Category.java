@@ -1,6 +1,9 @@
 package com.codegym.model;
 
 import com.codegym.model.blog.Blog;
+import com.fasterxml.jackson.annotation.JacksonInject;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,7 +18,8 @@ public class Category {
 
     private String name;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
+    @JsonBackReference
     private List<Blog> blogList;
 
 

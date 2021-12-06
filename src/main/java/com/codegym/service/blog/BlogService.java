@@ -15,6 +15,12 @@ public class BlogService implements IBlogService {
 
     @Autowired
     private IBlogRepository blogRepository;
+
+    @Override
+    public Iterable<Blog> findAll() {
+        return blogRepository.findAll();
+    }
+
     @Override
     public Page<Blog> findAllBlog(Pageable pageable) {
         return blogRepository.findAll(pageable);
@@ -35,8 +41,4 @@ public class BlogService implements IBlogService {
         blogRepository.deleteById(id);
     }
 
-    @Override
-    public Iterable<Blog> findAllByCategory(Category category) {
-        return null;
-    }
 }

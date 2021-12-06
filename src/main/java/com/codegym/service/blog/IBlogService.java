@@ -9,6 +9,8 @@ import java.util.Optional;
 
 public interface IBlogService {
 
+    Iterable<Blog> findAll();
+
     Page<Blog> findAllBlog(Pageable pageable);
 
     Optional<Blog> findById(Long id);
@@ -17,5 +19,4 @@ public interface IBlogService {
 
     void remove(Long id);
 
-    Iterable<Blog> findAllByCategory(Category category);
 }
