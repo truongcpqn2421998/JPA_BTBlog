@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Blog</title>
+</head>
+<body>
+<h1>Edit customer</h1>
+<p>
+    <a href="/blog/home">Blog list</a>
+</p>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<form th:action="@{/blog/edit}" th:object="${blogForm}" method="post" id="C" enctype="multipart/form-data">
+    <table>
+        <input th:field="*{id}" hidden>
+        <tr>
+            <td> Title:</td>
+            <td><input type="text" th:field="*{title}"/></td>
+        </tr>
+        <tr>
+            <td> Content:</td>
+            <td><textarea th:field="*{content}" form="C"></textarea></td>
+        </tr>
+        <tr>
+            <td>Category:</td>
+            <td>
+                <select name="category">
+                    <option th:each="p : ${categoryList}"
+                            th:value="${p.id}"
+                            th:text="${p.name}"
+                            th:selected="(${blogForm.category}) and (${p.id} == *{category.id})"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Img</td>
+            <td><input type="file" th:field="*{image}"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Edit blog"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
